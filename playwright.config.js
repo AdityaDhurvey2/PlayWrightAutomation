@@ -34,6 +34,8 @@ const config = {
   use: {
     browserName: "chromium",
     headless: false,
+    screenshot: "on",
+    trace: "retain-on-faliure",
     /* Base URL to use in actions like `await page.goto('')`. */
     // baseURL: 'http://localhost:3000',
 
