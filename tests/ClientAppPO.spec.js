@@ -1,6 +1,6 @@
 const { test, expect } = require("@playwright/test");
-const { LoginPage } = require("../pageObjects/LoginPage");
-const { DashboardPage } = require("../pageObjects/DashboardPage");
+const { LoginPage } = require("../pageobjects/LoginPage");
+const { DashboardPage } = require("../pageobjects/DashBoardPage");
 
 test("Client App login", async ({ page }) => {
   //js file- Login js, DashboardPage
