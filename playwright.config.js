@@ -27,9 +27,9 @@ const config = {
   // /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
 
   timeout: 40 * 1000,
-  exports: {
-    timeout: 5000,
-  },
+  // exports: {
+  //   timeout: 5000,
+  // },
 
   use: {
     browserName: "chromium",
