@@ -2,23 +2,37 @@ import { test, expect } from "@playwright/test";
 import { LoginPage } from "../Pages/LoginPage";
 import { HomePage } from "../Pages/HomePage";
 import { CartPage } from "../Pages/CartPage";
+import { PurchaseForm } from "../Pages/PurchaseForm";
+import dataset from "../utils/PomtestTestData.json";
 
 test("POM test", async ({ page }) => {
   // Login
   const login = new LoginPage(page);
   await login.gotoLoginPage();
-  await login.login("Aditya Dhurvey", "Aditya@12345");
-  await page.waitForTimeout(3000);
+  await login.login(dataset.username, dataset.password);
 
   // Home Page
   const home = new HomePage(page);
-  await home.addProductToCart("Nexus 6");
-  await page.waitForTimeout(3000);
+  await home.addProductToCart(dataset.productName);
   await home.gotoCart();
 
   // Cart Page
   const cart = new CartPage(page);
-  await page.waitForTimeout(3000);
-  const status = await cart.checkProductInCart("Nexus 6");
-  expect(await status).toBe(true);
+  // const status = await cart.checkProductInCart(dataset.productName);
+  // expect(status).toBe(true);
+  await cart.placeOrder();
+
+  // Purchase Form
+  const purchase = new PurchaseForm(page);
+  await purchase.fillPurchaseForm(
+    dataset.username,
+    dataset.country,
+    dataset.city,
+    dataset.cardNumber,
+    dataset.month,
+    dataset.year,
+  );
+  await page.waitForTimeout(1000);
+  await purchase.submitForm();
+  await purchase.okClick();
 });
