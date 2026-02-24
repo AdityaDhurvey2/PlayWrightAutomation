@@ -1,16 +1,22 @@
 exports.CartPage = class CartPage {
   constructor(page) {
     this.page = page;
-    this.noOfProducts = '//tbody[@id="tbodyid"]/tr/td[2]';
+    this.noOfProducts = page.locator("#tbodyid > tr > td:nth-child(2)");
   }
   async checkProductInCart(productName) {
-    const productsInCart = await this.page.$$(this.noOfProducts);
-    for (const product of productsInCart) {
-      console.log(await product.textContent());
-      if (productName === (await product.textContent())) {
+    const productsInCart = this.noOfProducts;
+    const count = await productsInCart.count();
+    for (let i = 0; i < count; i++) {
+      const productText = await productsInCart.nth(i).textContent();
+      if (productText.trim() === productName) {
         return true;
-        break;
       }
     }
+    return false;
+  }
+
+  async placeOrder() {
+    await this.page.getByRole("button", { type: "button" }).click();
+   
   }
 };
