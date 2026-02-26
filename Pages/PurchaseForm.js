@@ -27,7 +27,6 @@ exports.PurchaseForm = class PurchaseForm {
     await this.page.waitForTimeout(1000);
   }
   async okClick() {
-    // await this.page.waitForTimeout(1000);
     await this.diolog.waitFor({ state: "visible" });
     await this.okButton.click();
     await this.page.waitForTimeout(1000);
