@@ -7,13 +7,15 @@ exports.HomePage = class HomePage {
   }
 
   async addProductToCart(productName) {
-    const productList = this.productList.filter({ hasText: productName });
+    const product = this.productList.filter({ hasText: productName });
 
-    await productList.click();
+    await product.click();
 
     await this.page.once("dialog", async (dialog) => {
       await dialog.accept();
     });
+
+    
     await this.addToCartbtn.click();
   }
   async gotoCart() {

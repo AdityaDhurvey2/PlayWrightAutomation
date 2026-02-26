@@ -1,38 +1,50 @@
 import { test, expect } from "@playwright/test";
-import { LoginPage } from "../Pages/LoginPage";
-import { HomePage } from "../Pages/HomePage";
-import { CartPage } from "../Pages/CartPage";
-import { PurchaseForm } from "../Pages/PurchaseForm";
+const { POManager } = require("../Pages/POManager");
+
 import dataset from "../utils/PomtestTestData.json";
 
-test("POM test", async ({ page }) => {
+for (const data of dataset) {
+
+test(`POM test for user ${data.username}`, async ({ page }) => {
+  const poManager = new POManager(page);
   // Login
-  const login = new LoginPage(page);
+  const login = poManager.getLoginPage();
   await login.gotoLoginPage();
-  await login.login(dataset.username, dataset.password);
+
+  await expect(page).toHaveURL("https://www.demoblaze.com/index.html");
+  await expect(page).toHaveTitle("STORE");
+  await expect(login.logoElement).toBeVisible();
+
+  await expect(login.usernameInput).toBeEnabled();
+  await expect(login.passwordInput).toBeEnabled();
+
+  await login.login(data.username, data.password);
+  await expect(login.logoutButton).toBeVisible();
 
   // Home Page
-  const home = new HomePage(page);
-  await home.addProductToCart(dataset.productName);
+  const home = poManager.getHomePage();
+  await expect(home.productList).toBeVisible();
+  await home.addProductToCart(data.productName);
   await home.gotoCart();
 
   // Cart Page
-  const cart = new CartPage(page);
-  // const status = await cart.checkProductInCart(dataset.productName);
-  // expect(status).toBe(true);
+  const cart = poManager.getCartPage();
+  const status = await cart.checkProductInCart(data.productName);
+  expect(status).toBe(true);
   await cart.placeOrder();
 
   // Purchase Form
-  const purchase = new PurchaseForm(page);
+  const purchase = poManager.getPurchaseForm();
   await purchase.fillPurchaseForm(
-    dataset.username,
-    dataset.country,
-    dataset.city,
-    dataset.cardNumber,
-    dataset.month,
-    dataset.year,
+    data.username,
+    data.country,
+    data.city,
+    data.cardNumber,
+    data.month,
+    data.year,
   );
   await page.waitForTimeout(1000);
   await purchase.submitForm();
   await purchase.okClick();
 });
+}

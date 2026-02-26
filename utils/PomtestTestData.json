@@ -1,10 +1,22 @@
-{
-  "username": "Aditya Dhurvey",
-  "password": "Aditya@12345",
-  "productName": "Iphone 6 32gb",
-  "country": "India",
-  "city": "Noida",
-  "cardNumber": "1234 5678 9012 3456",
-  "month": "12",
-  "year": "2025"
-}
+[
+  {
+    "username": "Aditya Dhurvey",
+    "password": "Aditya@12345",
+    "productName": "Iphone 6 32gb",
+    "country": "India",
+    "city": "Noida",
+    "cardNumber": "1234 5678 9012 3456",
+    "month": "12",
+    "year": "2025"
+  },
+  {
+    "username": "Akanksha Singh",
+    "password": "Rani@12345",
+    "productName": "Iphone 6 32gb",
+    "country": "India",
+    "city": "Bhopal",
+    "cardNumber": "1234 5678 9012 3457",
+    "month": "11",
+    "year": "2026"
+  }
+]
