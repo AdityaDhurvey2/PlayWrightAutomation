@@ -4,7 +4,6 @@ exports.LoginPage = class LoginPage {
   constructor(page) {
     this.page = page;
     this.loginlink = page.getByRole("link", { name: "Log in" });
-   // expect(this.loginlink).toBeVisible();
     this.usernameInput = page.locator("input#loginusername");
     this.passwordInput = page.locator("input#loginpassword");
     this.loginButton = page.getByRole("button", { name: "Log in" });

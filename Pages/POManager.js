@@ -2,6 +2,7 @@ const { LoginPage } = require("./LoginPage");
 const { HomePage } = require("./HomePage");
 const { CartPage } = require("./CartPage");
 const { PurchaseForm } = require("./PurchaseForm");
+const { LogoutPage } = require("./LogoutPage");
 
 
 
@@ -13,6 +14,7 @@ class POManager {
     this.homePage = new HomePage(this.page);
     this.cartPage = new CartPage(this.page);
     this.purchaseForm = new PurchaseForm(this.page);
+    this.logoutPage = new LogoutPage(this.page);
   }
 
   getLoginPage() {
@@ -26,6 +28,9 @@ class POManager {
   }
   getPurchaseForm() {
     return this.purchaseForm;
+  }
+  getLogoutPage() {
+    return this.logoutPage;
   }
 };
 module.exports = { POManager };
